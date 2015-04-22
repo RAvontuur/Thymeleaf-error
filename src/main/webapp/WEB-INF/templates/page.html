@@ -1,0 +1,10 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+
+<div th:each="element, loopState : ${page.elementCollection}" th:remove="tag">
+    <span th:replace="page_element :: page_element(${element}, ${loopState.index})"></span>
+</div>
+
+</body>
+</html>
