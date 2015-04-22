@@ -1,2 +1,77 @@
 # Thymeleaf
-Example project with thymeleaf error
+Example project with thymeleaf concurency error
+
+# Run test
+```
+mvn clean verify
+```
+Maven will run tomcat (localhost:8080/ and jmeter (3 thread))
+
+# Give errors
+```
+SEVERE: Servlet.service() for servlet [spring] in context with path [] threw exception [Request processing failed; nested exception is org.thymeleaf.exceptions.TemplateProcessingException: Exception evaluating SpringEL expression: "prices" (page_element:9)] with root cause
+java.lang.NullPointerException
+        at org.springframework.expression.spel.ast.PropertyOrFieldReference.getValueInternal(PropertyOrFieldReference.java:84)
+        at org.springframework.expression.spel.ast.SpelNodeImpl.getValue(SpelNodeImpl.java:115)
+        at org.springframework.expression.spel.standard.SpelExpression.getValue(SpelExpression.java:265)
+        at org.thymeleaf.spring4.expression.SpelVariableExpressionEvaluator.evaluate(SpelVariableExpressionEvaluator.java:139)
+        at org.thymeleaf.standard.expression.SelectionVariableExpression.executeSelectionVariable(SelectionVariableExpression.java:146)
+        at org.thymeleaf.standard.expression.SimpleExpression.executeSimple(SimpleExpression.java:80)
+        at org.thymeleaf.standard.expression.Expression.execute(Expression.java:103)
+        at org.thymeleaf.standard.expression.Expression.execute(Expression.java:133)
+        at org.thymeleaf.standard.expression.Expression.execute(Expression.java:120)
+        at org.thymeleaf.standard.fragment.StandardFragmentProcessor.resolveFragmentParameters(StandardFragmentProcessor.java:154)
+        at org.thymeleaf.standard.fragment.StandardFragmentProcessor.computeStandardFragmentSpec(StandardFragmentProcessor.java:98)
+        at org.thymeleaf.standard.processor.attr.AbstractStandardFragmentHandlingAttrProcessor.computeFragment(AbstractStandardFragmentHandlingAttrProcessor.java:68)
+        at org.thymeleaf.processor.attr.AbstractFragmentHandlingAttrProcessor.processAttribute(AbstractFragmentHandlingAttrProcessor.java:63)
+        at org.thymeleaf.processor.attr.AbstractAttrProcessor.doProcess(AbstractAttrProcessor.java:87)
+        at org.thymeleaf.processor.AbstractProcessor.process(AbstractProcessor.java:212)
+        at org.thymeleaf.dom.Node.applyNextProcessor(Node.java:1017)
+        at org.thymeleaf.dom.Node.processNode(Node.java:972)
+        at org.thymeleaf.dom.NestableNode.computeNextChild(NestableNode.java:695)
+        at org.thymeleaf.dom.NestableNode.doAdditionalProcess(NestableNode.java:668)
+        at org.thymeleaf.dom.Node.processNode(Node.java:990)
+        at org.thymeleaf.dom.NestableNode.computeNextChild(NestableNode.java:695)
+        at org.thymeleaf.dom.NestableNode.doAdditionalProcess(NestableNode.java:668)
+        at org.thymeleaf.dom.Node.processNode(Node.java:990)
+        at org.thymeleaf.dom.NestableNode.computeNextChild(NestableNode.java:695)
+        at org.thymeleaf.dom.NestableNode.doAdditionalProcess(NestableNode.java:668)
+        at org.thymeleaf.dom.Node.processNode(Node.java:990)
+        at org.thymeleaf.dom.NestableNode.computeNextChild(NestableNode.java:695)
+        at org.thymeleaf.dom.NestableNode.doAdditionalProcess(NestableNode.java:668)
+        at org.thymeleaf.dom.Node.processNode(Node.java:990)
+        at org.thymeleaf.dom.Document.process(Document.java:93)
+        at org.thymeleaf.TemplateEngine.process(TemplateEngine.java:1155)
+        at org.thymeleaf.TemplateEngine.process(TemplateEngine.java:1060)
+        at org.thymeleaf.TemplateEngine.process(TemplateEngine.java:1011)
+        at org.thymeleaf.spring4.view.ThymeleafView.renderFragment(ThymeleafView.java:335)
+        at org.thymeleaf.spring4.view.ThymeleafView.render(ThymeleafView.java:190)
+        at org.springframework.web.servlet.DispatcherServlet.render(DispatcherServlet.java:1228)
+        at org.springframework.web.servlet.DispatcherServlet.processDispatchResult(DispatcherServlet.java:1011)
+        at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:955)
+        at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:877)
+        at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:961)
+        at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:852)
+        at javax.servlet.http.HttpServlet.service(HttpServlet.java:621)
+        at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:837)
+        at javax.servlet.http.HttpServlet.service(HttpServlet.java:728)
+        at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:305)
+        at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:210)
+        at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51)
+        at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:243)
+        at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:210)
+        at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:222)
+        at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:123)
+        at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:502)
+        at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:171)
+        at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:100)
+        at org.apache.catalina.valves.AccessLogValve.invoke(AccessLogValve.java:953)
+        at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:118)
+        at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:408)
+        at org.apache.coyote.http11.AbstractHttp11Processor.process(AbstractHttp11Processor.java:1041)
+        at org.apache.coyote.AbstractProtocol$AbstractConnectionHandler.process(AbstractProtocol.java:603)
+        at org.apache.tomcat.util.net.JIoEndpoint$SocketProcessor.run(JIoEndpoint.java:312)
+        at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+        at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+        at java.lang.Thread.run(Thread.java:745)
+```
