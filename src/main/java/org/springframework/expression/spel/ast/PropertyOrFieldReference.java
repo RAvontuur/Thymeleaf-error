@@ -79,8 +79,9 @@ public class PropertyOrFieldReference extends SpelNodeImpl {
     @Override
     public TypedValue getValueInternal(ExpressionState state) throws EvaluationException {
         TypedValue tv = getValueInternal(state.getActiveContextObject(), state.getEvaluationContext(), state.getConfiguration().isAutoGrowNullReferences());
-        if (this.cachedReadAccessor instanceof CompilablePropertyAccessor) {
-            CompilablePropertyAccessor accessor = (CompilablePropertyAccessor) this.cachedReadAccessor;
+        PropertyAccessor accessorToUse = this.cachedReadAccessor;
+        if (accessorToUse instanceof CompilablePropertyAccessor) {
+            CompilablePropertyAccessor accessor = (CompilablePropertyAccessor) accessorToUse;
             this.exitTypeDescriptor = CodeFlow.toDescriptor(accessor.getPropertyType());
         }
         return tv;
@@ -189,7 +190,6 @@ public class PropertyOrFieldReference extends SpelNodeImpl {
             catch (AccessException ae) {
                 // this is OK - it may have gone stale due to a class change,
                 // let's try to get a new one and call it before giving up
-                this.cachedReadAccessor = null;
             }
         }
 
